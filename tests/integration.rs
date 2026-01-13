@@ -111,7 +111,9 @@ fn test_instantiation() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_success();
@@ -141,14 +143,19 @@ fn test_lock_admin_badges() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_success();
 
     // Verify event was emitted
     assert!(
-        !receipt.expect_commit_success().application_events.is_empty(),
+        !receipt
+            .expect_commit_success()
+            .application_events
+            .is_empty(),
         "Should emit V1AdminBadgesLockedEvent"
     );
 }
@@ -177,14 +184,19 @@ fn test_lock_upgrade_badges() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_success();
 
     // Verify event was emitted
     assert!(
-        !receipt.expect_commit_success().application_events.is_empty(),
+        !receipt
+            .expect_commit_success()
+            .application_events
+            .is_empty(),
         "Should emit V1UpgradeBadgeLockedEvent"
     );
 }
@@ -212,10 +224,14 @@ fn test_cumulative_locking() {
             })
             .build();
 
-        env.ledger.execute_manifest(
-            manifest,
-            vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
-        ).expect_commit_success();
+        env.ledger
+            .execute_manifest(
+                manifest,
+                vec![NonFungibleGlobalId::from_public_key(
+                    &env.account.public_key,
+                )],
+            )
+            .expect_commit_success();
     }
 
     // Lock upgrade badges multiple times
@@ -237,10 +253,14 @@ fn test_cumulative_locking() {
             })
             .build();
 
-        env.ledger.execute_manifest(
-            manifest,
-            vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
-        ).expect_commit_success();
+        env.ledger
+            .execute_manifest(
+                manifest,
+                vec![NonFungibleGlobalId::from_public_key(
+                    &env.account.public_key,
+                )],
+            )
+            .expect_commit_success();
     }
 
     // Verify cumulative totals via get_lock_status
@@ -251,7 +271,9 @@ fn test_cumulative_locking() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_success();
@@ -276,12 +298,17 @@ fn test_invalid_admin_badge_resource() {
             ),
             Some(dec!("100")),
         )
-        .deposit_batch(env.account.account_address, ManifestExpression::EntireWorktop)
+        .deposit_batch(
+            env.account.account_address,
+            ManifestExpression::EntireWorktop,
+        )
         .build();
 
     let fake_receipt = env.ledger.execute_manifest(
         fake_manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
     let fake_resource = fake_receipt.expect_commit(true).new_resource_addresses()[0];
 
@@ -301,7 +328,9 @@ fn test_invalid_admin_badge_resource() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_failure();
@@ -326,12 +355,17 @@ fn test_invalid_upgrade_badge_resource() {
             ),
             Some(dec!("100")),
         )
-        .deposit_batch(env.account.account_address, ManifestExpression::EntireWorktop)
+        .deposit_batch(
+            env.account.account_address,
+            ManifestExpression::EntireWorktop,
+        )
         .build();
 
     let fake_receipt = env.ledger.execute_manifest(
         fake_manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
     let fake_resource = fake_receipt.expect_commit(true).new_resource_addresses()[0];
 
@@ -351,7 +385,9 @@ fn test_invalid_upgrade_badge_resource() {
 
     let receipt = env.ledger.execute_manifest(
         manifest,
-        vec![NonFungibleGlobalId::from_public_key(&env.account.public_key)],
+        vec![NonFungibleGlobalId::from_public_key(
+            &env.account.public_key,
+        )],
     );
 
     receipt.expect_commit_failure();
