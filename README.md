@@ -1,6 +1,6 @@
 # V1 Auth Relinquishment Contract
 
-[![Test](https://github.com/radixnameservice/rns-core-v2/actions/workflows/test.yml/badge.svg)](https://github.com/radixnameservice/rns-core-v2/actions/workflows/test.yml) [![Security audit](https://github.com/radixnameservice/rns-core-v2/actions/workflows/format.yml/badge.svg)](https://github.com/radixnameservice/rns-core-v2/actions/workflows/format.yml) [![Static Badge](https://img.shields.io/badge/Scrypto-v1.3.0-blue)](https://github.com/radixdlt/radixdlt-scrypto) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Test](https://github.com/radixnameservice/rns-v1-badge-lockers/actions/workflows/test.yml/badge.svg)](https://github.com/radixnameservice/rns-v1-badge-lockers/actions/workflows/test.yml) [![Security audit](https://github.com/radixnameservice/rns-v1-badge-lockers/actions/workflows/format.yml/badge.svg)](https://github.com/radixnameservice/rns-v1-badge-lockers/actions/workflows/format.yml) [![Static Badge](https://img.shields.io/badge/Scrypto-v1.3.0-blue)](https://github.com/radixdlt/radixdlt-scrypto) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A minimal, standalone Scrypto contract for permanently locking RNS V1 admin and upgrade badges.
 
