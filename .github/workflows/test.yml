@@ -1,0 +1,52 @@
+# Based on https://github.com/actions-rs/meta/blob/master/recipes/quickstart.md
+#
+# While our "example" application has the platform-specific code,
+# for simplicity we are compiling and testing everything on the Ubuntu environment only.
+# For multi-OS testing see the `cross.yml` workflow.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+name: Test
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - wasm32-unknown-unknown
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: 1.81.0
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --release --target=${{ matrix.target }} --all
+
+      - name: optimize wasm
+        uses: NiklasEi/wasm-opt-action@v2
+        with:
+          file: ./target/wasm32-unknown-unknown/release/*.wasm
+          optimize_all: true
+          options: "-Oz --strip-debug --strip-dwarf --strip-producers"
+
+      - name: cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --release --all
